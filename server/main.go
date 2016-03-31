@@ -12,8 +12,15 @@ import (
 
 
 
-//go:generate protoc -I protos -I$GOPATH/src protos/service.proto --go_out=plugins=grpc:protos
+//go:generate protoc \
+//  -I/usr/local/include \
+//  -I protos \
+//  -I$GOPATH/src \
+//  -I$GOPATH/src/github.com/gengo/grpc-gateway/third_party/googleapis \
+//  --go_out=Mgoogle/api/annotations.proto=github.com/gengo/grpc-gateway/third_party/googleapis/google/api,plugins=grpc:protos \
+//   protos/service.proto
 
+// //go:generate protoc -I/usr/local/include -I protos -I$GOPATH/src -I$GOPATH/src/github.com/gengo/grpc-gateway/third_party/googleapis --grpc-gateway_out=logtostderr=true:protos protos/service.proto
 
 const (
 	port = ":50051"
